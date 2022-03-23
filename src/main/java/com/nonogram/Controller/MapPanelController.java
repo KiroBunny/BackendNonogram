@@ -1,6 +1,7 @@
 package com.nonogram.Controller;
 
 import com.nonogram.Model.Game.MapPanel;
+import com.nonogram.Model.Game.ReferenceMap;
 import com.nonogram.Repositories.MapPanelRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,11 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:4200")
 public class MapPanelController {
     private final MapPanelRepository mapPanelRepository;
+    private final ReferenceMap referenceMap;
 
-    public MapPanelController(MapPanelRepository mapPanelRepository) {
+    public MapPanelController(MapPanelRepository mapPanelRepository, ReferenceMap referenceMap) {
         this.mapPanelRepository = mapPanelRepository;
+        this.referenceMap = referenceMap;
     }
 
     @GetMapping("/games")
@@ -22,8 +25,10 @@ public class MapPanelController {
     }
 
     @PostMapping("/myGame")
-    public Optional<MapPanel> getMapPanel(@RequestBody Long mapPanelID) {
-        return mapPanelRepository.findById(mapPanelID);
+    public void setMapPanel(@RequestBody Long mapPanelID) {
+        referenceMap.setPanelID(mapPanelID);
+        referenceMap.setReferencePanel( mapPanelRepository.findById(mapPanelID).get());
+
     }
 
 }

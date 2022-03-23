@@ -22,7 +22,9 @@ public class ReferenceMap {
 
     public MapPanel readMapPanelFromFileForGivenID(@NotNull long panelID) {
         try {
-            referencePanel = new MapPanel();
+            if (referencePanel == null) {
+                referencePanel = new MapPanel();
+            }
             File file = new File(MapPanel.PATH_TO_FILE + panelID + ".txt");
             Scanner sc = new Scanner(file);
             List<String> list = new ArrayList<>();
