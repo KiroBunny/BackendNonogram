@@ -1,22 +1,20 @@
 package com.nonogram.Controller;
 
 import com.nonogram.Model.Game.MapPanel;
-import com.nonogram.Model.Game.ReferenceMap;
 import com.nonogram.Repositories.MapPanelRepository;
+import com.nonogram.Service.GameService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class MapPanelController {
     private final MapPanelRepository mapPanelRepository;
-    private final ReferenceMap referenceMap;
+    private GameService gameService;
 
-    public MapPanelController(MapPanelRepository mapPanelRepository, ReferenceMap referenceMap) {
+    public MapPanelController(MapPanelRepository mapPanelRepository) {
         this.mapPanelRepository = mapPanelRepository;
-        this.referenceMap = referenceMap;
     }
 
     @GetMapping("/games")
@@ -26,9 +24,11 @@ public class MapPanelController {
 
     @PostMapping("/myGame")
     public void setMapPanel(@RequestBody Long mapPanelID) {
-        referenceMap.setPanelID(mapPanelID);
-        referenceMap.setReferencePanel( mapPanelRepository.findById(mapPanelID).get());
+       gameService = new GameService(mapPanelID);
+    }
 
+    public boolean checkElement(@RequestBody int row, @RequestBody int col){
+        return gameService.checkElement(row, col);
     }
 
 }
