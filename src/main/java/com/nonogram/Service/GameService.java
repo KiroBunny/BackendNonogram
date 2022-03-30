@@ -19,8 +19,15 @@ public class GameService {
         this.referenceMap = new ReferenceMap(panelID);
     }
 
+    public boolean checkElementForString(String rowCol) {
+        int c = rowCol.indexOf("-");
+        int row = Integer.parseInt(rowCol.substring(0, c));
+        int col = Integer.parseInt(rowCol.substring(c+1));
+        return referenceMap.getReferencePanel().getValueAtIndex(row, col);
+    }
+
     public boolean checkElement(int row, int col) {
-        return false;
+        return referenceMap.getReferencePanel().getValueAtIndex(row, col);
     }
 
     public ReferenceMap getReferenceMap() {

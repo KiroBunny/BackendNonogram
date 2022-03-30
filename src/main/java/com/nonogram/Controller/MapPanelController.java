@@ -1,6 +1,7 @@
 package com.nonogram.Controller;
 
 import com.nonogram.Model.Game.MapPanel;
+import com.nonogram.Model.Game.ReferenceMap;
 import com.nonogram.Repositories.MapPanelRepository;
 import com.nonogram.Service.GameService;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,25 @@ public class MapPanelController {
         return (List<MapPanel>) mapPanelRepository.findAll();
     }
 
-    @PostMapping("/game")
-    public void setMapPanel(@RequestBody Long mapPanelID) {
-       gameService = new GameService(mapPanelID);
+    @GetMapping("/game/{id}")
+    public MapPanel getMyMapPanel(@PathVariable("id") Long mapPanelID) {
+        return mapPanelRepository.findById(mapPanelID).get();
     }
 
-    public boolean checkElement(@RequestBody int row, @RequestBody int col){
+    @PostMapping("/game/{id}")
+    public void setMyMapPanel(@PathVariable("id") Long mapPanelID) {
+       gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+    }
+/*
+    @RequestMapping(path = "/game/{id}/{row-col}", method = RequestMethod.GET)
+    public boolean checkElementForString(@PathVariable("id") Long mapPanelID, @PathVariable("row-col") String row_col){
+        gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+        return gameService.checkElementForString(row_col);
+    }*/
+
+    @RequestMapping(path = "/game/{id}/{row}/{col}", method = RequestMethod.GET)
+    public boolean checkElement(@PathVariable("id") Long mapPanelID, @PathVariable("row") int row,  @PathVariable("col") int col){
+        gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
         return gameService.checkElement(row, col);
     }
 

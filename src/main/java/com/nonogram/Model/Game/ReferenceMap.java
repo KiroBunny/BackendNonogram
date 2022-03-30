@@ -2,7 +2,6 @@ package com.nonogram.Model.Game;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -15,6 +14,11 @@ public class ReferenceMap {
     private MapPanel referencePanel;
 
     public ReferenceMap() {
+    }
+
+    public ReferenceMap(MapPanel referencePanel) {
+        this.referencePanel = referencePanel;
+        this.panelID = referencePanel.getId();
     }
 
     public ReferenceMap(long panelID) {

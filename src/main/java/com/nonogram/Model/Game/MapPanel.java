@@ -33,6 +33,13 @@ public class MapPanel {
         }
     }
 
+    public boolean getValueAtIndex(int row, int col){
+        if (row < Size && col < Size) {
+            return tab[row][col];
+        }
+        return false;
+    }
+
     public long getId() {
         return id;
     }
