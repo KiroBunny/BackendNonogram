@@ -2,6 +2,7 @@ package com.nonogram.Model.Game;
 
 import com.sun.istack.NotNull;
 
+import javax.persistence.Entity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

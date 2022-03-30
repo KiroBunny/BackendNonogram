@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class MapPanelController {
     private final MapPanelRepository mapPanelRepository;
     private GameService gameService;
@@ -22,7 +22,7 @@ public class MapPanelController {
         return (List<MapPanel>) mapPanelRepository.findAll();
     }
 
-    @PostMapping("/myGame")
+    @PostMapping("/game")
     public void setMapPanel(@RequestBody Long mapPanelID) {
        gameService = new GameService(mapPanelID);
     }

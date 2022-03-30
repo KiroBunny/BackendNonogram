@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class MapPanel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int Size = 0;
 
@@ -18,7 +18,7 @@ public class MapPanel {
     public MapPanel() {
     }
 
-    public MapPanel(int xSize) {
+    public MapPanel(int Size) {
         this.Size = Size;
         createTab();
     }
