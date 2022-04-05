@@ -32,17 +32,11 @@ public class MapPanelController {
     public void setMyMapPanel(@PathVariable("id") Long mapPanelID) {
        gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
     }
-/*
-    @RequestMapping(path = "/game/{id}/{row-col}", method = RequestMethod.GET)
-    public boolean checkElementForString(@PathVariable("id") Long mapPanelID, @PathVariable("row-col") String row_col){
-        gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
-        return gameService.checkElementForString(row_col);
-    }*/
 
-    @RequestMapping(path = "/game/{id}/{row}/{col}", method = RequestMethod.GET)
-    public boolean checkElement(@PathVariable("id") Long mapPanelID, @PathVariable("row") int row,  @PathVariable("col") int col){
+    @PutMapping("/game/{id}")
+    public boolean checkElement(@RequestBody List<Integer> cords, @PathVariable Long mapPanelID){
         gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
-        return gameService.checkElement(row, col);
+        return gameService.checkElement(cords);
     }
 
 }

@@ -3,6 +3,8 @@ package com.nonogram.Service;
 import com.nonogram.Model.Game.ReferenceMap;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GameService {
     private ReferenceMap referenceMap;
@@ -19,14 +21,9 @@ public class GameService {
         this.referenceMap = new ReferenceMap(panelID);
     }
 
-    public boolean checkElementForString(String rowCol) {
-        int c = rowCol.indexOf("-");
-        int row = Integer.parseInt(rowCol.substring(0, c));
-        int col = Integer.parseInt(rowCol.substring(c+1));
-        return referenceMap.getReferencePanel().getValueAtIndex(row, col);
-    }
-
-    public boolean checkElement(int row, int col) {
+    public boolean checkElement(List<Integer> cords) {
+        int row = cords.get(0);
+        int col = cords.get(1);
         return referenceMap.getReferencePanel().getValueAtIndex(row, col);
     }
 
