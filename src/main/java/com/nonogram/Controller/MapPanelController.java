@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 public class MapPanelController {
     private final MapPanelRepository mapPanelRepository;
     private GameService gameService;
@@ -23,17 +23,17 @@ public class MapPanelController {
         return (List<MapPanel>) mapPanelRepository.findAll();
     }
 
-    @GetMapping("/game/{id}")
+    @GetMapping("/games/{id}")
     public MapPanel getMyMapPanel(@PathVariable("id") Long mapPanelID) {
         return mapPanelRepository.findById(mapPanelID).get();
     }
 
-    @PostMapping("/game/{id}")
+    @PostMapping("/games/{id}")
     public void setMyMapPanel(@PathVariable("id") Long mapPanelID) {
        gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
     }
 
-    @PutMapping("/game/{id}")
+    @PutMapping("/games/{id}")
     public boolean checkElement(@RequestBody List<Integer> cords, @PathVariable Long mapPanelID){
         gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
         return gameService.checkElement(cords);
