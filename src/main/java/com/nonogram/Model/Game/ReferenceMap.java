@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.SimpleFileVisitor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,6 +13,7 @@ public class ReferenceMap {
 
     private long panelID;
     private MapPanel referencePanel;
+    String[] numberTable;
 
     public ReferenceMap() {
     }
@@ -66,6 +68,7 @@ public class ReferenceMap {
                 }
                 referencePanel.addTab(row, i, value);
             }
+
         }
     }
 
@@ -83,5 +86,47 @@ public class ReferenceMap {
 
     public void setReferencePanel(MapPanel referencePanel) {
         this.referencePanel = referencePanel;
+    }
+
+    public String[] getRowTabOfTrue(Long mapPanelID) {
+        int number = 0;
+        String textNumber = "";
+        numberTable = new String[readMapPanelFromFile().getSize()];
+        for (int row=0; row < referencePanel.getSize(); row++){
+            for (int col = 0; col < referencePanel.getSize(); col++) {
+                if (referencePanel.getTab()[row][col])number++;
+                else if (number!=0){
+                    textNumber += number + ",";
+                    number=0;
+                }
+
+                System.out.println(number);
+
+            }
+
+            numberTable[row]=textNumber;
+            textNumber = "";
+            number = 0;
+        }
+        return numberTable;
+    }
+
+    public String[] getColTabOfTrue(Long mapPanelID) {
+        int number = 0;
+        String textNumber = "";
+        numberTable = new String[readMapPanelFromFile().getSize()];
+
+        for (int col = 0; col < referencePanel.getSize(); col++) {
+            for (int row=0; row < referencePanel.getSize(); row++){
+                if (referencePanel.getTab()[row][col])number++;
+                else {
+                    textNumber += number  +",";
+                    number=0;
+                }
+            }
+            numberTable[col]=textNumber;
+            textNumber = "";
+        }
+        return numberTable;
     }
 }

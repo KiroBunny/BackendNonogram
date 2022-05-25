@@ -30,7 +30,19 @@ public class MapPanelController {
 
     @PostMapping("/games/{id}")
     public void setMyMapPanel(@PathVariable("id") Long mapPanelID) {
-       gameService = new GameService( new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+       gameService = new GameService(new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+    }
+
+    @GetMapping("/games/{id}/row")
+    public String[] getRowTabOfTrue(@PathVariable("id") Long mapPanelID) {
+        gameService = new GameService(new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+        return gameService.getRowTabOfTrue(mapPanelID);
+    }
+
+    @GetMapping("/games/{id}/col")
+    public String[] getColTabOfTrue(@PathVariable("id") Long mapPanelID) {
+        gameService = new GameService(new ReferenceMap(mapPanelRepository.findById(mapPanelID).get()));
+        return gameService.getColTabOfTrue(mapPanelID);
     }
 
     @PutMapping("/games/{id}")

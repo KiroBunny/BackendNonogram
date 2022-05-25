@@ -2,6 +2,7 @@ package com.nonogram.Service;
 
 import com.nonogram.Model.Game.ReferenceMap;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -33,5 +34,13 @@ public class GameService {
 
     public void setReferenceMap(ReferenceMap referenceMap) {
         this.referenceMap = referenceMap;
+    }
+
+    public String[] getRowTabOfTrue(Long mapPanelID) {
+        return referenceMap.getRowTabOfTrue(mapPanelID);
+    }
+
+    public String[] getColTabOfTrue(Long mapPanelID) {
+        return referenceMap.getColTabOfTrue(mapPanelID);
     }
 }

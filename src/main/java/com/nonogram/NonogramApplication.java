@@ -33,7 +33,7 @@ public class NonogramApplication {
     @Bean
     CommandLineRunner initGame(MapPanelRepository mapPanelRepository) {
         return args -> {
-            int fileCount = 2;
+            int fileCount = 4;
             ReferenceMap[] referenceMap = new ReferenceMap[10];
 
             for (int i = 0; i < fileCount; i++) {

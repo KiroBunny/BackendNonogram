@@ -10,7 +10,7 @@ public class MapPanel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private int Size = 0;
+    private int size = 0;
 
     boolean[][] tab;
     static final String PATH_TO_FILE = "src/main/resources/MapPanels/";
@@ -19,22 +19,22 @@ public class MapPanel {
     }
 
     public MapPanel(int Size) {
-        this.Size = Size;
+        this.size = Size;
         createTab();
     }
 
     public void createTab() {
-        tab = new boolean[Size][Size];
+        tab = new boolean[size][size];
     }
 
     public void addTab(int row, int col, boolean value) {
-        if (row < Size && col < Size){
+        if (row < size && col < size) {
             tab[row][col] = value;
         }
     }
 
     public boolean getValueAtIndex(int row, int col){
-        if (row < Size && col < Size) {
+        if (row < size && col < size) {
             return tab[row][col];
         }
         return false;
@@ -45,11 +45,11 @@ public class MapPanel {
     }
 
     public int getSize() {
-        return Size;
+        return size;
     }
 
     public void setSize(int Size) {
-        this.Size = Size;
+        this.size = Size;
     }
 
     public boolean[][] getTab() {
